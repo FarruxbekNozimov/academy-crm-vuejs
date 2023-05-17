@@ -1,5 +1,7 @@
 <script setup>
 import Avatar from '../../UI/Avatar.vue'
+import { useHeaderStore } from '/src/stores/header/header.js'
+const store = useHeaderStore()
 </script>
 
 <template>
@@ -10,7 +12,7 @@ import Avatar from '../../UI/Avatar.vue'
           <div class="flex items-center justify-start">
             <span
               class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-main-color"
-              >Dashboard</span
+              >{{ store.GET_TITLE }}</span
             >
           </div>
           <div class="flex items-center justify-center gap-10">

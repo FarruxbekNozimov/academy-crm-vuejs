@@ -1,6 +1,10 @@
 <script setup>
 import Sidebar from '../components/Sidebar/Sidebar.vue'
 import Header from '../components/Header/Header.vue'
+
+import { useHeaderStore } from '/src/stores/header/header.js'
+const store = useHeaderStore()
+store.CHANGE_TITLE('Dashboard')
 </script>
 
 <template>
