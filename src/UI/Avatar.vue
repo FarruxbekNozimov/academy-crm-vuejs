@@ -14,8 +14,8 @@ import settings from '/src/assets/img/settings.png'
     </button>
     <div class="flex items-center justify-center gap-2">
       <span class="">
-        <span class="w-full text-main-color text-semibold block">Ochilov M.</span>
-        <span class="w-full text-gray-500">Admin</span>
+        <h6 class="text-center w-full text-main-color text-semibold block">Ochilov M.</h6>
+        <h6 class="text-center w-full text-gray-500">Admin</h6>
       </span>
       <img src="https://img.freepik.com/free-icon/arab_318-198038.jpg" class="h-[50px]" />
     </div>

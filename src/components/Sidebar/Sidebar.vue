@@ -1,12 +1,5 @@
 <script setup>
 import { navLinks } from '../../constants/navLink'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-router.beforeEach((to, from, next) => {
-  console.log(to)
-})
 </script>
 
 <template>
@@ -27,8 +20,8 @@ router.beforeEach((to, from, next) => {
           <li v-for="link in navLinks" :key="link.id">
             <router-link
               :to="link.link"
-              :id="link.path"
-              class="flex items-center p-3 px-10 rounded-s-full bg-[#4D44B5] text-white rounded-lg hover:text-[#4D44B5] hover:bg-white duration-200 text-md"
+              exact-active-class="router-link-active"
+              class="flex items-center p-3 px-10 rounded-s-full bg-[#4D44B5] text-white rounded-lg hover:text-[#4D44B5] hover:bg-[#f3f4ff] duration-200 text-md"
             >
               <i :title="link.title" :class="link.icon" class="text-2xl"></i>
               <span class="ml-3">{{ link.title }}</span>
@@ -42,7 +35,7 @@ router.beforeEach((to, from, next) => {
 
 <style>
 .router-link-active {
-  background: white;
+  background: #f3f4ff;
   color: #4d44b5;
   font-weight: bold;
 }
