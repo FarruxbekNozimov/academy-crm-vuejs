@@ -3,7 +3,7 @@
   <div>
     <form class="flex items-center">
       <div class="relative w-[300px]">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
           <svg
             aria-hidden="true"
             class="w-7 h-7 text-gray-500 dark:text-gray-400"
@@ -21,7 +21,7 @@
         <input
           type="text"
           id="simple-search"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-full focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full focus:ring-purple-500 focus:border-purple-500 block w-full pl-16 p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
           placeholder="Izlash"
           required
         />

@@ -6,7 +6,7 @@ import { navLinks } from '../../constants/navLink'
   <div>
     <aside
       id="logo-sidebar"
-      class="fixed top-0 left-0 z-40 w-72 h-screen transition-transform -translate-x-full bg-[#4D44B5] sm:translate-x-0"
+      class="fixed top-0 left-0 z-40 w-72 h-screen transition-transform -translate-x-full bg-main-bg sm:translate-x-0"
       aria-label="Sidebar"
     >
       <div class="text-3xl w-full text-center p-6">
@@ -21,7 +21,7 @@ import { navLinks } from '../../constants/navLink'
             <router-link
               :to="link.link"
               exact-active-class="router-link-active"
-              class="flex items-center p-3 px-10 rounded-s-full bg-[#4D44B5] text-white rounded-lg hover:text-[#4D44B5] hover:bg-[#f3f4ff] duration-200 text-md"
+              class="flex items-center p-3 px-10 rounded-s-full bg-main-bg text-white rounded-lg hover:text-main-bg hover:bg-[#f3f4ff] duration-200 text-md"
             >
               <i :title="link.title" :class="link.icon" class="text-2xl"></i>
               <span class="ml-3">{{ link.title }}</span>

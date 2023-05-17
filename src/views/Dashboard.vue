@@ -1,17 +1,20 @@
 <script setup>
 import Sidebar from '../components/Sidebar/Sidebar.vue'
 import Header from '../components/Header/Header.vue'
-
+import { onMounted } from 'vue'
 import { useHeaderStore } from '/src/stores/header/header.js'
 const store = useHeaderStore()
-store.CHANGE_TITLE('Dashboard')
+
+onMounted(() => {
+  store.CHANGE_TITLE('Dashboard')
+})
 </script>
 
 <template>
   <main>
     <section id="main" class="w-full h-[100vh]">
       <Sidebar />
-      <div class="bg-[#E5E5E5] h-[100vh] sm:ml-72">
+      <div class="bg-[#E5E5E5] h-[100vh] sm:ml-72 overflow-y-scroll">
         <Header />
         <router-view></router-view>
       </div>

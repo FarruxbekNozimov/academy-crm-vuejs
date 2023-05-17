@@ -37,8 +37,8 @@ export const navLinks = [
   },
   {
     id: 7,
-    title: 'FAQ',
-    link: '/faq',
+    title: 'Savol Javob',
+    link: '/quiz',
     icon: 'bx bx-conversation'
   },
   {
