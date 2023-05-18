@@ -27,19 +27,21 @@ const closeEdit = () => {
 let teachersInfo = reactive({
   name: '',
   surname: '',
-  birthday: '',
-  group_number: '',
   login: '',
-  password: ''
+  password: '',
+  description: '',
+  birthday: '',
+  subject: ''
 })
 
 let editStudentInfo = reactive({
   name: '',
   surname: '',
-  birthday: '',
-  group_number: '',
   login: '',
-  password: ''
+  password: '',
+  description: '',
+  birthday: '',
+  subject: ''
 })
 
 const addStudent = () => {
@@ -47,17 +49,16 @@ const addStudent = () => {
     id: Date.now(),
     name: teachersInfo.name,
     surname: teachersInfo.surname,
+    subject: teachersInfo.subject,
     img: 'https://c8.alamy.com/comp/2HATM0Y/muslim-businessman-avatar-arab-person-flat-icon-2HATM0Y.jpg',
-    group_number: teachersInfo.group_number,
-    grade: 'Freelance',
-    birthday: teachersInfo.birthday,
-    id_number: store.GENERATE_ID(),
+    description: teachersInfo.description,
     login: teachersInfo.login,
     password: teachersInfo.password,
     createdAt: Date.now()
   }
+  console.log(student)
   try {
-    store.ADD_USER(student)
+    store.ADD_TEACHERS(student)
     toast.success(`Added successfuly`, {
       autoClose: 1000,
       theme: 'light'
@@ -99,7 +100,7 @@ const openEdit = (student) => {
     name: currentUser.name,
     surname: currentUser.surname,
     birthday: currentUser.birthday,
-    group_number: currentUser.group_number,
+    subject: currentUser.subject,
     login: currentUser.login,
     password: currentUser.password,
     img: 'https://c8.alamy.com/comp/2HATM0Y/muslim-businessman-avatar-arab-person-flat-icon-2HATM0Y.jpg',
@@ -131,8 +132,7 @@ const editStudent = () => {
 }
 
 onMounted(() => {
-  // headStore.CHANGE_TITLE('Students')
-  store.SET_USER(teachers)
+  store.SET_TEACHERS(teachers)
 })
 </script>
 <template>
@@ -218,12 +218,12 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- CREARTE USER MODAL -->
+    <!-- CREATE USER MODAL -->
     <div
       id="defaultModal"
       tabindex="-1"
       aria-hidden="true"
-      class="absolute hs-overlay top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-hidden md:inset-0 h-[80vh] bg-main-light-bg"
+      class="absolute hs-overlay top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-hidden md:inset-0 h-[120vh] bg-main-light-bg"
       :class="modalTogg ? '' : 'hidden'"
     >
       <div class="relative w-full max-w-full h-[90vh]">
@@ -256,14 +256,6 @@ onMounted(() => {
           <!-- Modal body -->
           <div class="p-6 space-y-6">
             <div class="w-full flex items-start gap-10">
-              <div class="block">
-                <span class="text-main-color font-bold text-md">Rasm *</span>
-                <div
-                  class="h-[200px] w-[200px] mt-5 border-4 border-gray-500 border-dashed rounded-lg flex items-center text-center p-3"
-                >
-                  Drag and drop or click here to select file
-                </div>
-              </div>
               <div class="block w-[50%]">
                 <div class="mb-10">
                   <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
@@ -273,24 +265,12 @@ onMounted(() => {
                     type="text"
                     id="first_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-                    placeholder="Jahon"
+                    placeholder="Maria"
                     required
                     v-model="teachersInfo.name"
                   />
                 </div>
-                <div class="mb-10">
-                  <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
-                    >Tug'ilgan sana *</label
-                  >
-                  <div class="relative max-w-sm">
-                    <input
-                      type="text"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/2 pl-4 p-2.5"
-                      placeholder="24 February 1997"
-                      v-model="teachersInfo.birthday"
-                    />
-                  </div>
-                </div>
+
                 <div class="mb-10">
                   <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
                     >Login *</label
@@ -299,10 +279,35 @@ onMounted(() => {
                     type="text"
                     id="first_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-                    placeholder="username"
+                    placeholder="History@mai.com"
                     required
                     v-model="teachersInfo.login"
                   />
+                </div>
+                <div class="mb-10">
+                  <label for="message" class="block mb-2 text-md text-md text-main-color font-bold"
+                    >Ma'lumot *</label
+                  >
+                  <textarea
+                    id="message"
+                    rows="9"
+                    class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-purple-500 focus:border-purple-500"
+                    placeholder="Write your thoughts here..."
+                    v-model="teachersInfo.description"
+                  ></textarea>
+                </div>
+                <div class="mb-10">
+                  <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
+                    >Tug'ilgan sana *</label
+                  >
+                  <div class="relative max-w-sm">
+                    <input
+                      type="text"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-2/2 pl-4 p-2.5"
+                      placeholder="24 February 1997"
+                      v-model="teachersInfo.birthday"
+                    />
+                  </div>
                 </div>
               </div>
               <div class="block w-[50%]">
@@ -321,19 +326,6 @@ onMounted(() => {
                 </div>
                 <div class="mb-10">
                   <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
-                    >Guruhini tanlang *</label
-                  >
-                  <input
-                    type="text"
-                    id="first_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-                    placeholder="Guruhini tanlang"
-                    required
-                    v-model="teachersInfo.group_number"
-                  />
-                </div>
-                <div class="mb-10">
-                  <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
                     >Parol *</label
                   >
                   <input
@@ -343,6 +335,27 @@ onMounted(() => {
                     placeholder="●●●●●●●●●●●●●"
                     required
                     v-model="teachersInfo.password"
+                  />
+                </div>
+                <div class="mb-10">
+                  <label class="text-main-color font-bold text-md">Rasm *</label>
+                  <div
+                    class="h-[200px] w-[200px] mt-2 border-4 border-gray-300 border-dashed rounded-lg flex items-center text-center p-3"
+                  >
+                    Drag and drop or click here to select file
+                  </div>
+                </div>
+                <div class="mb-10">
+                  <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
+                    >Fan nomi *</label
+                  >
+                  <input
+                    type="text"
+                    id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+                    placeholder=""
+                    required
+                    v-model="teachersInfo.subject"
                   />
                 </div>
               </div>
@@ -428,7 +441,7 @@ onMounted(() => {
                   <div class="relative max-w-sm">
                     <input
                       type="text"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/2 pl-4 p-2.5"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-2/2 pl-4 p-2.5"
                       placeholder="24 February 1997"
                       v-model="editStudentInfo.birthday"
                     />
@@ -472,7 +485,7 @@ onMounted(() => {
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
                     placeholder="Guruhini tanlang"
                     required
-                    v-model="editStudentInfo.group_number"
+                    v-model="editStudentInfo.subject"
                   />
                 </div>
                 <div class="mb-10">
@@ -505,12 +518,12 @@ onMounted(() => {
     </div>
 
     <!-- TABLE SECTION START -->
-    <div class="max-w-full mt-10">
-      <div class="flex flex-col">
-        <div class="overflow-x-auto sm:rounded-lg">
-          <div class="inline-block min-w-full align-middle">
+    <div class="w-full mt-10 grid-cols-2" :class="modalTogg || editUser ? 'hidden' : ''">
+      <div class="grid-rows-2">
+        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div v-for="teacher in store.GET_TEACHERS" class="inline-block min-w-full align-middle">
             <div
-              class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+              class="w-full max-w-sm bg-white border border-gray-200 rounded-2xl shadow dark:bg-gray-800 dark:border-gray-700"
             >
               <div class="flex justify-end px-4 pt-4">
                 <button
@@ -565,22 +578,24 @@ onMounted(() => {
               <div class="flex flex-col items-center pb-10">
                 <img
                   class="w-24 h-24 mb-3 rounded-full shadow-lg"
-                  src="/docs/images/people/profile-picture-3.jpg"
+                  src="https://cdn4.iconfinder.com/data/icons/arabic-avatars/100/arab_avatar_muslim_arabic_religion_islam-02-512.png"
                   alt="Bonnie image"
                 />
-                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
-                <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
+                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                  {{ teacher.name }}
+                </h5>
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ teacher.subject }}</span>
                 <div class="flex mt-4 space-x-3 md:mt-6">
-                  <a
-                    href="#"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >Add friend</a
+                  <button
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-main-bg hover:bg-main-color rounded-full h-[50px] duration-300"
                   >
-                  <a
-                    href="#"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-                    >Message</a
+                    <i class="bx bx-phone text-xl"></i>
+                  </button>
+                  <button
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-main-bg border border-gray-300 hover:bg-main-color rounded-full h-[50px] duration-300"
                   >
+                    <i class="bx bx-envelope text-xl"></i>
+                  </button>
                 </div>
               </div>
             </div>

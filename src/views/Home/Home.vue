@@ -47,7 +47,7 @@ const menu = [
         </thead>
         <tbody>
           <tr
-          v-for="i in 5"
+            v-for="teacher in teachersStore.GET_TEACHERS"
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
             <th
@@ -56,11 +56,11 @@ const menu = [
             >
               <div class="flex items-center gap-3">
                 <img
-                  src="https://www.macmillandictionary.com/us/external/slideshow/full/Grey_full.png"
+                  :src="teacher.img"
                   alt=""
-                  class="w-[50px] h-[50px] rounded-full"
+                  class="w-[50px] h-[50px] rounded-full object-cover"
                 />
-                <span> Asilbek Abudullayev </span>
+                <span> {{ teacher.name }} {{ teacher.surname }} </span>
               </div>
             </th>
             <td class="px-6 py-4 text-main-bg font-bold">ID 123456789</td>

@@ -1,9 +1,10 @@
 import { ref, reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { students } from '../../constants/students.js'
 
 export const useStudentStore = defineStore('student', () => {
   const state = reactive({
-    user: [],
+    user: [...students],
     currentPage: 1,
     itemsPerPage: 5
   })
