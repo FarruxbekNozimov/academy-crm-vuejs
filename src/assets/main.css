@@ -9,6 +9,7 @@
 }
 ::-webkit-scrollbar-track {
   border-radius: 5px;
+  background: #4d44b565;
 }
 ::-webkit-scrollbar-thumb {
   background: #4d44b5;

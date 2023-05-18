@@ -6,7 +6,7 @@ const store = useHeaderStore()
 
 <template>
   <div>
-    <nav class="bg-[#E5E5E5] w-full">
+    <nav class="bg-main-light-bg w-full">
       <div class="px-3 py-4 lg:px-5">
         <div class="flex items-center justify-between">
           <div class="flex items-center justify-start">

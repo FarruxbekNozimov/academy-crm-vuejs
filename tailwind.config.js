@@ -6,7 +6,8 @@ module.exports = {
       colors: {
         'main-color': '#303972',
         'main-bg': '#4D44B5',
-        'button-cl': '#344054'
+        'button-cl': '#344054',
+        'main-light-bg': '#E5E5E5'
       }
     }
   },
