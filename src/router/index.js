@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useHeaderStore } from '/src/stores/header/header.js'
 import Dashboard from '../views/Dashboard.vue'
+import Home from '../views/Home/Home.vue'
 import Students from '../views/Students/Students.vue'
 import Teachers from '../views/Teachers/Teachers.vue'
 import Error from '../views/Error/Error.vue'
@@ -12,6 +14,11 @@ const router = createRouter({
       name: 'Dashboard',
       component: Dashboard,
       children: [
+        {
+          path: '/',
+          name: 'Dashboard',
+          component: Home
+        },
         {
           path: '/students',
           name: 'Students',
@@ -30,6 +37,13 @@ const router = createRouter({
       component: Error
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const headStore = useHeaderStore()
+  headStore.CHANGE_TITLE(to.name)
+  console.log(to.name)
+  next()
 })
 
 export default router
