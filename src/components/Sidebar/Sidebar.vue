@@ -21,7 +21,7 @@ import { navLinks } from '../../constants/navLink'
             <router-link
               :to="link.link"
               exact-active-class="router-link-active"
-              class="flex items-center p-3 px-10 rounded-s-full bg-main-bg text-white rounded-lg hover:text-main-bg hover:bg-[#f3f4ff] duration-200 text-md"
+              class="flex items-center p-3 px-10 rounded-s-full bg-main-bg text-white rounded-lg hover:text-main-bg hover:bg-main-light-bg duration-200 text-md"
             >
               <i :title="link.title" :class="link.icon" class="text-2xl"></i>
               <span class="ml-3">{{ link.title }}</span>
@@ -35,7 +35,7 @@ import { navLinks } from '../../constants/navLink'
 
 <style>
 .router-link-active {
-  background: #f3f4ff;
+  background: #e5e5e5;
   color: #4d44b5;
   font-weight: bold;
 }

@@ -7,7 +7,7 @@ const store = useHeaderStore()
 <template>
   <div>
     <nav class="bg-main-light-bg w-full">
-      <div class="px-3 py-4 lg:px-5">
+      <div class="py-4 px-10">
         <div class="flex items-center justify-between">
           <div class="flex items-center justify-start">
             <span
@@ -15,7 +15,7 @@ const store = useHeaderStore()
               >{{ store.GET_TITLE }}</span
             >
           </div>
-          <div class="flex items-center justify-center gap-10">
+          <div class="flex items-center justify-center gap-8">
             <Avatar />
           </div>
         </div>
