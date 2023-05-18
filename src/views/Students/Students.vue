@@ -525,33 +525,38 @@ onMounted(() => {
                     </th>
                     <th
                       scope="col"
-                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                      class="py-3 px-6 text-sm font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
                     >
                       F.I.SH
+                      <i class="bx bx-down-arrow-alt"></i>
                     </th>
                     <th
                       scope="col"
-                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                      class="py-3 px-6 text-sm font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
                     >
                       Guruh raqami
+                      <i class="bx bx-down-arrow-alt"></i>
                     </th>
                     <th
                       scope="col"
-                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                      class="py-3 px-6 text-sm font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
                     >
                       Bosqich
+                      <i class="bx bx-down-arrow-alt"></i>
                     </th>
                     <th
                       scope="col"
-                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                      class="py-3 px-6 text-sm font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
                     >
                       Qo'shilgan sana
+                      <i class="bx bx-down-arrow-alt"></i>
                     </th>
                     <th
                       scope="col"
-                      class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                      class="py-3 px-6 text-sm font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
                     >
                       ID raqami
+                      <i class="bx bx-down-arrow-alt"></i>
                     </th>
                     <th scope="col" class="p-4">Actions</th>
                   </tr>

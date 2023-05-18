@@ -8,15 +8,15 @@ export const useTeachersStore = defineStore('teachers', () => {
     itemsPerPage: 5
   })
 
-  const SET_USER = (data) => {
+  const SET_TEACHERS = (data) => {
     state.teachers = data
   }
 
-  const ADD_USER = (data) => {
+  const ADD_TEACHERS = (data) => {
     state.teachers.push(data)
   }
 
-  const GET_USER = (id) => {
+  const GET_TEACHER = (id) => {
     for (let i in state.teachers) {
       if (state.teachers[i].id == id.value) {
         return state.teachers[i]
@@ -24,13 +24,13 @@ export const useTeachersStore = defineStore('teachers', () => {
     }
   }
 
-  const DELETE_USER = (id) => {
+  const DELETE_TEACHERS = (id) => {
     for (let i in state.teachers) {
       if (state.teachers[i].id == id.value) state.teachers.splice(i, 1)
     }
   }
 
-  const EDIT_USER = (id, data) => {
+  const EDIT_TEACHERS = (id, data) => {
     for (let i in state.teachers) {
       if (state.teachers[i].id == id.value) {
         state.teachers[i] = data
@@ -42,7 +42,16 @@ export const useTeachersStore = defineStore('teachers', () => {
     return state.teachers.length ? state.teachers[state.teachers.length - 1].id_number + 1 : 1000
   }
 
-  const GET_USERS = computed(() => state.teachers)
+  const GET_TEACHERS = computed(() => state.teachers)
 
-  return { state, EDIT_USER, SET_USER, GET_USERS, ADD_USER, GENERATE_ID, DELETE_USER, GET_USER }
+  return {
+    state,
+    EDIT_TEACHERS,
+    SET_TEACHERS,
+    GET_TEACHERS,
+    ADD_TEACHERS,
+    GENERATE_ID,
+    DELETE_TEACHERS,
+    GET_TEACHERS
+  }
 })
