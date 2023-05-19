@@ -112,7 +112,7 @@ const DECREMENT_PAGE = () => {
       <div class="flex items-center justify-between bg-white">
         <span class="p-5"
           >{{ (pagination.currentPage - 1) * pagination.itemsPerPage + 1 }}-{{
-            (pagination.currentPage - 1) * pagination.itemsPerPage + pagination.itemsPerPage
+            pagination.currentPage - 1 + pagination.itemsPerPage
           }}
           dan {{ teachersStore.GET_TEACHERS.length }}ta</span
         >

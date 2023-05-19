@@ -6,7 +6,7 @@ export const useTeachersStore = defineStore('teachers', () => {
   const state = reactive({
     teachers: [...teachers],
     currentPage: 1,
-    itemsPerPage: 5
+    itemsPerPage: 4
   })
 
   const SET_TEACHERS = (data) => {

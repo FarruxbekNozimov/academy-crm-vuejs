@@ -6,7 +6,7 @@ export const useStudentStore = defineStore('student', () => {
   const state = reactive({
     user: [...students],
     currentPage: 1,
-    itemsPerPage: 5
+    itemsPerPage: 4
   })
 
   const SET_USER = (data) => {
