@@ -23,7 +23,10 @@ const toggleModal = () => {
   headStore.CHANGE_TITLE(modalTogg.value ? 'Students' : "Yangi o'quvchi qo'shish")
   modalTogg.value = !modalTogg.value
 }
-const toggleDelete = () => (deleteModalTogg.value = !deleteModalTogg.value)
+const toggleDelete = () => {
+  headStore.CHANGE_TITLE(deleteModalTogg.value ? 'Students' : "Yangi o'quvchi qo'shish")
+  deleteModalTogg.value = !deleteModalTogg.value
+}
 const closeEdit = () => {
   editUser.value = null
 }

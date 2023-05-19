@@ -16,10 +16,13 @@ const editUser = ref(0)
 
 const toggleModal = () => {
   for (let i in teachersInfo) teachersInfo[i] = ''
-  headStore.CHANGE_TITLE(modalTogg.value ? 'Teachers' : "Yangi o'quvchi qo'shish")
+  headStore.CHANGE_TITLE(modalTogg.value ? 'Teachers' : "Yangi o'qituvchi qo'shish")
   modalTogg.value = !modalTogg.value
 }
-const toggleDelete = () => (deleteModalTogg.value = !deleteModalTogg.value)
+const toggleDelete = () => {
+  headStore.CHANGE_TITLE(modalTogg.value ? 'Teachers' : "Yangi o'qituvchi qo'shish")
+  deleteModalTogg.value = !deleteModalTogg.value
+}
 const closeEdit = () => {
   editUser.value = null
 }
@@ -34,7 +37,7 @@ let teachersInfo = reactive({
   subject: ''
 })
 
-let editStudentInfo = reactive({
+let editTeacherInfo = reactive({
   name: '',
   surname: '',
   login: '',
@@ -45,20 +48,20 @@ let editStudentInfo = reactive({
 })
 
 const addStudent = () => {
-  const student = {
+  const teacher = {
     id: Date.now(),
     name: teachersInfo.name,
     surname: teachersInfo.surname,
     subject: teachersInfo.subject,
+    birthday: teachersInfo.birthday,
     img: 'https://c8.alamy.com/comp/2HATM0Y/muslim-businessman-avatar-arab-person-flat-icon-2HATM0Y.jpg',
     description: teachersInfo.description,
     login: teachersInfo.login,
     password: teachersInfo.password,
     createdAt: Date.now()
   }
-  console.log(student)
   try {
-    store.ADD_TEACHERS(student)
+    store.ADD_TEACHER(teacher)
     toast.success(`Added successfuly`, {
       autoClose: 1000,
       theme: 'light'
@@ -76,7 +79,7 @@ const addStudent = () => {
 
 const deleteStudent = () => {
   try {
-    store.DELETE_USER(deletedID)
+    store.DELETE_TEACHER(deletedID)
     toast.success(`Deleted successfuly`, {
       autoClose: 1000,
       theme: 'light'
@@ -92,10 +95,10 @@ const deleteStudent = () => {
   }
 }
 
-const openEdit = (student) => {
-  editUser.value = student.id
-  const currentUser = store.GET_USER(editUser)
-  editStudentInfo = {
+const openEdit = (teacher) => {
+  editUser.value = teacher.id
+  const currentUser = store.GET_TEACHER(editUser)
+  editTeacherInfo = {
     id: currentUser.id,
     name: currentUser.name,
     surname: currentUser.surname,
@@ -110,18 +113,15 @@ const openEdit = (student) => {
   }
 }
 
-const editStudent = () => {
+const editTeacher = () => {
   try {
-    store.EDIT_USER(editUser, editStudentInfo)
+    store.EDIT_TEACHER(editUser, editTeacherInfo)
     toast.success(`Deleted successfuly`, {
       autoClose: 1000,
       theme: 'light'
     })
     closeEdit()
-    // for (let i in editStudentInfo) editStudentInfo[i] = ''
-    console.log(editUser.value)
     editUser.value = null
-    console.log(editUser.value)
   } catch (err) {
     console.log(err)
     toast.error(`Error`, {
@@ -132,7 +132,7 @@ const editStudent = () => {
 }
 
 onMounted(() => {
-  store.SET_TEACHERS(teachers)
+  store.SET_TEACHER(teachers)
 })
 </script>
 <template>
@@ -152,7 +152,7 @@ onMounted(() => {
       </button>
     </div>
 
-    <!-- DELETE USER MODAL -->
+    <!-- DELETE TEACHER MODAL -->
     <div
       id="deleteModal"
       tabindex="-1"
@@ -166,7 +166,7 @@ onMounted(() => {
           <button
             @click="toggleDelete"
             type="button"
-            class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white w-full text-start"
           >
             <svg
               aria-hidden="true"
@@ -218,7 +218,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- CREATE USER MODAL -->
+    <!-- CREATE TEACHER MODAL -->
     <div
       id="defaultModal"
       tabindex="-1"
@@ -374,22 +374,22 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- UPDATE USER MODAL -->
+    <!-- UPDATE TEACHER MODAL -->
     <div
       id="defaultModal"
       tabindex="-1"
       aria-hidden="true"
-      class="absolute top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-hidden md:inset-0 h-[100vh] bg-main-light-bg"
+      class="absolute hs-overlay top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-hidden md:inset-0 h-[120vh] bg-main-light-bg"
       :class="editUser ? '' : 'hidden'"
     >
       <div class="relative w-full max-w-full h-[90vh]">
         <!-- Modal content -->
-        <form @submit.prevent="editStudent" class="relative bg-white rounded-xl shadow-xl">
+        <form @submit.prevent="editTeacher" class="relative bg-white rounded-xl shadow-xl">
           <!-- Modal header -->
           <div class="flex items-start justify-between p-4 border-b rounded-t-xl bg-main-bg">
-            <h3 class="text-xl text-white font-bold">O'quvchi ma'lumotlarini o'zgartirish</h3>
+            <h3 class="text-xl text-white font-bold">O'quvchi ma'lumotlari</h3>
             <button
-              @click="closeEdit"
+              @click="closeEdit()"
               type="button"
               class="text-purple-400 bg-transparent hover:bg-purple-200 hover:text-purple-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
             >
@@ -412,14 +412,6 @@ onMounted(() => {
           <!-- Modal body -->
           <div class="p-6 space-y-6">
             <div class="w-full flex items-start gap-10">
-              <div class="block">
-                <span class="text-main-color font-bold text-md">Rasm *</span>
-                <div
-                  class="h-[200px] w-[200px] mt-5 border-4 border-gray-500 border-dashed rounded-lg flex items-center text-center p-3"
-                >
-                  Drag and drop or click here to select file
-                </div>
-              </div>
               <div class="block w-[50%]">
                 <div class="mb-10">
                   <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
@@ -429,10 +421,36 @@ onMounted(() => {
                     type="text"
                     id="first_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-                    placeholder="Jahon"
+                    placeholder="Maria"
                     required
-                    v-model="editStudentInfo.name"
+                    v-model="editTeacherInfo.name"
                   />
+                </div>
+
+                <div class="mb-10">
+                  <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
+                    >Login *</label
+                  >
+                  <input
+                    type="text"
+                    id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+                    placeholder="History@mai.com"
+                    required
+                    v-model="editTeacherInfo.login"
+                  />
+                </div>
+                <div class="mb-10">
+                  <label for="message" class="block mb-2 text-md text-md text-main-color font-bold"
+                    >Ma'lumot *</label
+                  >
+                  <textarea
+                    id="message"
+                    rows="9"
+                    class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-purple-500 focus:border-purple-500"
+                    placeholder="Write your thoughts here..."
+                    v-model="editTeacherInfo.description"
+                  ></textarea>
                 </div>
                 <div class="mb-10">
                   <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
@@ -443,22 +461,9 @@ onMounted(() => {
                       type="text"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-2/2 pl-4 p-2.5"
                       placeholder="24 February 1997"
-                      v-model="editStudentInfo.birthday"
+                      v-model="editTeacherInfo.birthday"
                     />
                   </div>
-                </div>
-                <div class="mb-10">
-                  <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
-                    >Login *</label
-                  >
-                  <input
-                    type="text"
-                    id="first_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-                    placeholder="username"
-                    required
-                    v-model="editStudentInfo.login"
-                  />
                 </div>
               </div>
               <div class="block w-[50%]">
@@ -472,20 +477,7 @@ onMounted(() => {
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
                     placeholder="Jalilov"
                     required
-                    v-model="editStudentInfo.surname"
-                  />
-                </div>
-                <div class="mb-10">
-                  <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
-                    >Guruhini tanlang *</label
-                  >
-                  <input
-                    type="text"
-                    id="first_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-                    placeholder="Guruhini tanlang"
-                    required
-                    v-model="editStudentInfo.subject"
+                    v-model="editTeacherInfo.surname"
                   />
                 </div>
                 <div class="mb-10">
@@ -498,7 +490,28 @@ onMounted(() => {
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
                     placeholder="●●●●●●●●●●●●●"
                     required
-                    v-model="editStudentInfo.password"
+                    v-model="editTeacherInfo.password"
+                  />
+                </div>
+                <div class="mb-10">
+                  <label class="text-main-color font-bold text-md">Rasm *</label>
+                  <div
+                    class="h-[200px] w-[200px] mt-2 border-4 border-gray-300 border-dashed rounded-lg flex items-center text-center p-3"
+                  >
+                    Drag and drop or click here to select file
+                  </div>
+                </div>
+                <div class="mb-10">
+                  <label for="first_name" class="block mb-2 text-md text-main-color font-bold"
+                    >Fan nomi *</label
+                  >
+                  <input
+                    type="text"
+                    id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+                    placeholder=""
+                    required
+                    v-model="editTeacherInfo.subject"
                   />
                 </div>
               </div>
@@ -508,9 +521,9 @@ onMounted(() => {
           <div class="flex items-center justify-end p-6 space-x-10 rounded-b">
             <button
               type="submit"
-              class="text-main-bg bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-full border-[3px] border-main-bg text-lg font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
+              class="text-white bg-main-bg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-lg px-5 py-2.5 text-center"
             >
-              Saqlash
+              Qo'shish
             </button>
           </div>
         </form>
@@ -552,25 +565,33 @@ onMounted(() => {
                 >
                   <ul class="py-2" aria-labelledby="dropdownButton">
                     <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                        >Edit</a
+                      <button
+                        @click="() => openEdit(teacher)"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white w-full text-start"
                       >
+                        Edit
+                      </button>
                     </li>
                     <li>
-                      <a
+                      <button
                         href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                        >Export Data</a
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white w-full text-start"
                       >
+                        Export Data
+                      </button>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                        >Delete</a
+                      <button
+                        @click="
+                          () => {
+                            toggleDelete()
+                            deletedID = teacher.id
+                          }
+                        "
+                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white w-full text-start"
                       >
+                        Delete
+                      </button>
                     </li>
                   </ul>
                 </div>

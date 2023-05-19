@@ -14,7 +14,7 @@ onMounted(() => {
   <main>
     <section id="main" class="w-full h-[100vh]">
       <Sidebar />
-      <div class="bg-main-light-bg h-[100vh] sm:ml-72 overflow-y-scroll ">
+      <div class="bg-main-light-bg h-[100vh] sm:ml-72 overflow-y-scroll">
         <Header />
         <router-view></router-view>
       </div>
