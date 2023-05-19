@@ -116,7 +116,7 @@ const openEdit = (teacher) => {
 const editTeacher = () => {
   try {
     store.EDIT_TEACHER(editUser, editTeacherInfo)
-    toast.success(`Deleted successfuly`, {
+    toast.success(`Edited successfuly`, {
       autoClose: 1000,
       theme: 'light'
     })
