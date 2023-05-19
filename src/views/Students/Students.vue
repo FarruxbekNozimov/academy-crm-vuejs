@@ -535,37 +535,37 @@ onMounted(() => {
                     </th>
                     <th
                       scope="col"
-                      class="py-3 px-6 text-sm font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                      class="py-3 px-6 font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-sm"
                     >
-                      F.I.SH
+                      <span class="text-xs">F.I.SH</span>
                       <i class="bx bx-down-arrow-alt"></i>
                     </th>
                     <th
                       scope="col"
-                      class="py-3 px-6 text-sm font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                      class="py-3 px-6 font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-sm"
                     >
-                      Guruh raqami
+                      <span class="text-xs">Guruh raqami</span>
                       <i class="bx bx-down-arrow-alt"></i>
                     </th>
                     <th
                       scope="col"
-                      class="py-3 px-6 text-sm font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                      class="py-3 px-6 font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-sm"
                     >
-                      Bosqich
+                      <span class="text-xs">Bosqich</span>
                       <i class="bx bx-down-arrow-alt"></i>
                     </th>
                     <th
                       scope="col"
-                      class="py-3 px-6 text-sm font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                      class="py-3 px-6 font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-sm"
                     >
-                      Qo'shilgan sana
+                      <span class="text-xs">Qo'shilgan sana</span>
                       <i class="bx bx-down-arrow-alt"></i>
                     </th>
                     <th
                       scope="col"
-                      class="py-3 px-6 text-sm font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                      class="py-3 px-6 font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-sm"
                     >
-                      ID raqami
+                      <span class="text-xs">ID raqami</span>
                       <i class="bx bx-down-arrow-alt"></i>
                     </th>
                     <th scope="col" class="p-4">Actions</th>
