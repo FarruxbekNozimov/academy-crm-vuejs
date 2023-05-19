@@ -633,7 +633,10 @@ onMounted(() => {
                 >
                   Avvalgisi
                 </button>
-                <span>Sahifa {{ pagination.currentPage }} dan {{ pagination.itemsPerPage }}</span>
+                <span
+                  >Sahifa {{ pagination.currentPage }} dan
+                  {{ Math.ceil(store.GET_USERS.length / pagination.itemsPerPage) }}</span
+                >
                 <button
                   @click="INCREMENT_PAGE"
                   class="hover:bg-slate-300 rounded-lg border border-gray-400 text-button-cl p-2 px-4"
