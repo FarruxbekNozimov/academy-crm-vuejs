@@ -19,7 +19,7 @@ import Avatar from '../../UI/Avatar.vue'
       <div v-for="el in 3" class="mb-3 text-main-color flex justify-between items-center">
         <div class="flex items-center gap-2">
           <img
-            src="https://www.macmillandictionary.com/us/external/slideshow/full/Grey_full.png"
+            src="https://img.freepik.com/free-icon/arab_318-198038.jpg"
             alt="avatar"
             class="w-[50px] h-[50px] rounded-full"
           />
@@ -46,7 +46,7 @@ import Avatar from '../../UI/Avatar.vue'
       <div v-for="el in 3" class="mb-3 text-main-color flex justify-between items-center">
         <div class="flex items-center gap-2">
           <img
-            src="https://www.macmillandictionary.com/us/external/slideshow/full/Grey_full.png"
+            src="https://img.freepik.com/free-icon/arab_318-198038.jpg"
             alt="avatar"
             class="w-[50px] h-[50px] rounded-full"
           />

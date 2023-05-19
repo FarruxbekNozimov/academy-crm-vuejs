@@ -46,7 +46,8 @@ export const useTeachersStore = defineStore('teachers', () => {
   const GET_TEACHERS = computed(() => state.teachers)
 
   return {
-    state,
+    currentPage: state.currentPage,
+    itemsPerPage: state.itemsPerPage,
     EDIT_TEACHERS,
     SET_TEACHERS,
     GET_TEACHERS,

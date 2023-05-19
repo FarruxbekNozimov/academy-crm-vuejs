@@ -13,6 +13,10 @@ const modalTogg = ref(false)
 const deleteModalTogg = ref(false)
 const deletedID = ref(null)
 const editUser = ref(0)
+const pagination = reactive({
+  currentPage: store.currentPage,
+  itemsPerPage: store.itemsPerPage
+})
 
 const toggleModal = () => {
   for (let i in studentInfo) studentInfo[i] = ''
@@ -23,7 +27,6 @@ const toggleDelete = () => (deleteModalTogg.value = !deleteModalTogg.value)
 const closeEdit = () => {
   editUser.value = null
 }
-
 let studentInfo = reactive({
   name: '',
   surname: '',
@@ -117,10 +120,7 @@ const editStudent = () => {
       theme: 'light'
     })
     closeEdit()
-    // for (let i in editStudentInfo) editStudentInfo[i] = ''
-    console.log(editUser.value)
     editUser.value = null
-    console.log(editUser.value)
   } catch (err) {
     console.log(err)
     toast.error(`Error`, {
@@ -130,8 +130,18 @@ const editStudent = () => {
   }
 }
 
+const INCREMENT_PAGE = () => {
+  if (pagination.currentPage < Math.ceil(store.GET_USERS.length / store.itemsPerPage))
+    pagination.currentPage++
+}
+
+const DECREMENT_PAGE = () => {
+  if (pagination.currentPage > 1) {
+    pagination.currentPage--
+  }
+}
+
 onMounted(() => {
-  // headStore.CHANGE_TITLE('Students')
   store.SET_USER(students)
 })
 </script>
@@ -505,7 +515,7 @@ onMounted(() => {
     </div>
 
     <!-- TABLE SECTION START -->
-    <div class="max-w-full mt-10">
+    <div class="max-w-full mt-5">
       <div class="flex flex-col">
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
           <div class="inline-block min-w-full align-middle">
@@ -564,7 +574,14 @@ onMounted(() => {
                 <tbody
                   class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
                 >
-                  <tr v-for="student in store.GET_USERS" class="hover:bg-gray-100">
+                  <tr
+                    v-for="student in store.GET_USERS.slice(
+                      (pagination.currentPage - 1) * pagination.itemsPerPage,
+                      (pagination.currentPage - 1) * pagination.itemsPerPage +
+                        pagination.itemsPerPage
+                    )"
+                    class="hover:bg-gray-100"
+                  >
                     <td class="p-4 w-4">
                       <div class="flex items-center">
                         <input
@@ -611,12 +628,14 @@ onMounted(() => {
               </table>
               <div class="flex justify-between items-center text-md p-4 px-10 bg-white">
                 <button
+                  @click="DECREMENT_PAGE"
                   class="hover:bg-slate-300 rounded-lg border border-gray-400 text-button-cl p-2 px-4"
                 >
                   Avvalgisi
                 </button>
-                <span>Sahifa 1 dan 10</span>
+                <span>Sahifa {{ pagination.currentPage }} dan {{ pagination.itemsPerPage }}</span>
                 <button
+                  @click="INCREMENT_PAGE"
                   class="hover:bg-slate-300 rounded-lg border border-gray-400 text-button-cl p-2 px-4"
                 >
                   Keyingisi
