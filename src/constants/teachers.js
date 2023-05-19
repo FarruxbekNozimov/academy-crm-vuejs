@@ -42,16 +42,5 @@ export const teachers = [
     login: 'login',
     password: 'password',
     createdAt: '2023.05.18'
-  },
-  {
-    id: 4,
-    name: 'Mirzayev',
-    surname: "Mirg'ulom",
-    subject: 'Physics',
-    img: 'https://c8.alamy.com/comp/2HATM0Y/muslim-businessman-avatar-arab-person-flat-icon-2HATM0Y.jpg',
-    description: 'Hello Tashkent',
-    login: 'login',
-    password: 'password',
-    createdAt: '2023.05.18'
   }
 ]
